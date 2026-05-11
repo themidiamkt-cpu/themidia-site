@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Post do Blog | The Mídia</title>
+  <link rel="icon" href="/icon.png" />
+  <style>
+    body{margin:0;background:#030303;color:#fff;font-family:Inter,Arial,sans-serif;line-height:1.75}a{color:inherit}.wrap{width:min(820px,calc(100% - 40px));margin:0 auto}header{border-bottom:1px solid rgba(255,255,255,.08);background:#050505}.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.back{color:#FF1F8E;text-decoration:none;font-weight:800}.hero{padding:72px 0 34px}.meta{color:#FF1F8E;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.18em}h1{font-family:"Space Grotesk",Inter,Arial,sans-serif;font-size:clamp(36px,7vw,64px);line-height:1;margin:14px 0 18px}p{color:rgba(255,255,255,.68);font-size:18px}article{padding:24px 0 80px}.missing{padding:70px 0;color:rgba(255,255,255,.62)}
+  </style>
+</head>
+<body>
+  <header><div class="wrap nav"><strong>THE MÍDIA</strong><a class="back" href="/blog/">Voltar ao blog</a></div></header>
+  <main class="wrap" id="post-root"></main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://mujaacymoymysjvkvtdm.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11amFhY3ltb3lteXNqdmt2dGRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1NjY4NjYsImV4cCI6MjA4NTE0Mjg2Nn0.fHUyHc4lHIKHMQ5vjw5PP5sYSUo09oCq4qvLmrNs5uY';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const root = document.getElementById('post-root');
+    const params = new URLSearchParams(location.search);
+    const slug = params.get('slug');
+
+    function formatDate(value) {
+      if (!value) return '';
+      const [year, month, day] = value.split('-');
+      return `${day}/${month}/${year}`;
+    }
+
+    function paragraphize(text) {
+      return escapeHTML(text).split(/\n\s*\n/).filter(Boolean).map(part => `<p>${part.replace(/\n/g, '<br>')}</p>`).join('');
+    }
+
+    function escapeHTML(value) {
+      return String(value || '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char]));
+    }
+
+    async function loadPost() {
+      if (!slug) {
+        root.innerHTML = '<div class="missing"><h1>Post não encontrado</h1><p>Abra um post pela página do blog.</p></div>';
+        return;
+      }
+
+      const { data: post, error } = await supabaseClient
+        .from('posts')
+        .select('title, category, excerpt, content, published_at')
+        .eq('slug', slug)
+        .single();
+
+      if (error || !post) {
+        root.innerHTML = '<div class="missing"><h1>Post não encontrado</h1><p>Esse post pode ter sido removido ou ainda não foi publicado.</p></div>';
+        if (error) console.error(error);
+        return;
+      }
+
+      document.title = `${post.title} | The Mídia`;
+      root.innerHTML = `
+        <section class="hero">
+          <div class="meta">${escapeHTML(post.category || 'Blog')} · ${escapeHTML(formatDate(post.published_at))}</div>
+          <h1>${escapeHTML(post.title)}</h1>
+          <p>${escapeHTML(post.excerpt || '')}</p>
+        </section>
+        <article>${paragraphize(post.content)}</article>
+      `;
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>

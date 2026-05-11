@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog da The Mídia Marketing</title>
+  <meta name="description" content="Posts semanais da The Mídia Marketing sobre tráfego pago, Meta Ads, Google Ads e crescimento para negócios locais." />
+  <link rel="icon" href="/icon.png" />
+  <style>
+    :root { color-scheme: dark; --pink:#FF1F8E; --orange:#FF6B35; --bg:#030303; --panel:#0f0f0f; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: #fff; font-family: Inter, Arial, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(3,3,3,.86); backdrop-filter: blur(16px); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .06em; }
+    .mark { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(255,31,142,.22), rgba(255,107,53,.22)); color: var(--pink); }
+    .home { padding: 12px 18px; border-radius: 999px; color: #fff; background: linear-gradient(135deg, var(--pink), var(--orange)); font-size: 14px; font-weight: 800; }
+    .hero { padding: 86px 0 54px; border-bottom: 1px solid rgba(255,255,255,.08); background: radial-gradient(circle at top right, rgba(255,31,142,.18), transparent 34%), radial-gradient(circle at bottom left, rgba(255,107,53,.12), transparent 30%); }
+    .eyebrow { color: var(--pink); font-size: 12px; font-weight: 900; letter-spacing: .22em; text-transform: uppercase; }
+    h1 { margin: 14px 0 18px; max-width: 850px; font-family: "Space Grotesk", Inter, Arial, sans-serif; font-size: clamp(42px, 7vw, 82px); line-height: .96; letter-spacing: 0; }
+    .lead { max-width: 720px; color: rgba(255,255,255,.64); font-size: 18px; line-height: 1.7; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .pill { border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 10px 14px; color: rgba(255,255,255,.72); font-size: 13px; font-weight: 700; }
+    main { padding: 54px 0 90px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .card { min-height: 360px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; background: var(--panel); box-shadow: 0 18px 50px rgba(0,0,0,.24); }
+    .media { min-height: 150px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(255,31,142,.16), rgba(255,107,53,.1)); color: var(--pink); font-weight: 900; }
+    .body { flex: 1; display: flex; flex-direction: column; padding: 24px; }
+    .meta { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 14px; color: rgba(255,255,255,.34); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .cat { color: var(--pink); }
+    h2 { margin: 0 0 12px; font-family: "Space Grotesk", Inter, Arial, sans-serif; font-size: 21px; line-height: 1.18; }
+    .card p { flex: 1; margin: 0; color: rgba(255,255,255,.56); font-size: 14px; line-height: 1.65; }
+    .read { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.08); color: var(--pink); font-size: 13px; font-weight: 900; }
+    .plan { margin-top: 44px; padding: 30px; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; background: rgba(255,255,255,.03); }
+    .plan h2 { font-size: 28px; }
+    .weeks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px; }
+    .week { padding: 18px; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; background: rgba(0,0,0,.22); color: rgba(255,255,255,.72); font-size: 14px; line-height: 1.5; }
+    .week strong { display: block; margin-bottom: 7px; color: #fff; }
+    .empty { grid-column: 1 / -1; padding: 28px; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; color: rgba(255,255,255,.56); background: rgba(255,255,255,.03); line-height: 1.6; }
+    footer { padding: 36px 0; border-top: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.42); font-size: 13px; }
+    @media (max-width: 900px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      .nav { min-height: 68px; }
+      .brand { font-size: 13px; }
+      .mark { width: 38px; height: 38px; border-radius: 10px; }
+      .home { padding: 10px 14px; font-size: 12px; white-space: nowrap; }
+      .hero { padding: 58px 0 38px; }
+      h1 { font-size: clamp(38px, 12vw, 58px); line-height: 1; }
+      .lead { font-size: 16px; line-height: 1.6; }
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+      .weeks { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; overflow-x: auto; }
+      .card { min-height: auto; }
+      .media { min-height: 74px; font-size: 12px; }
+      .body { padding: 10px; }
+      .meta { align-items: flex-start; flex-direction: column; gap: 4px; font-size: 9px; margin-bottom: 8px; }
+      h2 { font-size: 13px; line-height: 1.2; margin-bottom: 0; }
+      .card p { display: none; }
+      .read { margin-top: 12px; padding-top: 10px; font-size: 10px; }
+      .plan { padding: 22px; }
+      .toolbar { gap: 8px; }
+      .pill { padding: 9px 12px; font-size: 12px; }
+    }
+
+    @media (max-width: 420px) {
+      .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      .home { width: 100%; text-align: center; }
+      h1 { font-size: 38px; }
+      .grid { gap: 8px; }
+      .media { min-height: 62px; }
+      .body { padding: 8px; }
+      h2 { font-size: 12px; }
+      .read { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="/"><span class="mark">TM</span><span>THE MÍDIA<br><small style="color:var(--pink);letter-spacing:.22em">MARKETING</small></span></a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+        <a class="home" href="/admin/">Admin</a>
+        <a class="home" href="/#blog">Voltar para o site</a>
+      </div>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Blog</h1>
+    </div>
+  </section>
+  <main class="wrap">
+    <section class="grid" id="posts-grid" aria-label="Posts do blog">
+      <div class="empty">Carregando posts...</div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">© 2026 The Mídia Marketing · Blog de tráfego pago e crescimento local</div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (function () {
+      const SUPABASE_URL = 'https://mujaacymoymysjvkvtdm.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11amFhY3ltb3lteXNqdmt2dGRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1NjY4NjYsImV4cCI6MjA4NTE0Mjg2Nn0.fHUyHc4lHIKHMQ5vjw5PP5sYSUo09oCq4qvLmrNs5uY';
+      const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const target = document.getElementById('posts-grid');
+      if (!target) return;
+
+      const fallbackPosts = [
+        {
+          title: 'Como reduzir o custo por lead no Meta Ads sem perder volume',
+          slug: 'como-reduzir-custo-por-lead',
+          category: 'Meta Ads',
+          excerpt: 'Um checklist para revisar campanha, criativo, oferta, segmentação e página de destino antes de aumentar investimento.',
+          published_at: '2026-05-09',
+          href: '/blog/como-reduzir-custo-por-lead.html'
+        },
+        {
+          title: 'Google Ads para negócios locais em Campinas e região',
+          slug: 'google-ads-negocios-locais',
+          category: 'Google Ads',
+          excerpt: 'Como estruturar campanhas para captar clientes próximos, separar intenção de busca e medir ligações, rotas e conversas.',
+          published_at: '2026-05-16',
+          href: '/blog/google-ads-negocios-locais.html'
+        },
+        {
+          title: 'ROAS vs ROI: qual métrica importa para o seu negócio?',
+          slug: 'roas-vs-roi',
+          category: 'Estratégia',
+          excerpt: 'Entenda quando olhar receita de anúncio, quando olhar lucro real e como isso muda a decisão de escalar uma campanha.',
+          published_at: '2026-05-23',
+          href: '/blog/roas-vs-roi.html'
+        }
+      ];
+
+      function escapeHTML(value) {
+        return String(value || '').replace(/[&<>"']/g, char => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[char]));
+      }
+
+      function formatDate(value) {
+        if (!value) return '';
+        const [year, month, day] = value.split('-');
+        return `${day}/${month}/${year}`;
+      }
+
+      function renderPosts(posts) {
+        if (!posts.length) {
+          target.innerHTML = '<div class="empty">Nenhum post publicado ainda.</div>';
+          return;
+        }
+
+        target.innerHTML = posts.map(post => `
+          <a class="card" href="${post.href || `/blog/post.html?slug=${encodeURIComponent(post.slug)}`}">
+            <div class="media">${escapeHTML(post.category || 'Blog')}</div>
+            <div class="body">
+              <div class="meta"><span class="cat">${escapeHTML(post.category || 'Blog')}</span><time datetime="${escapeHTML(post.published_at || '')}">${escapeHTML(formatDate(post.published_at))}</time></div>
+              <h2>${escapeHTML(post.title)}</h2>
+              <p>${escapeHTML(post.excerpt || '')}</p>
+              <span class="read">Ler artigo</span>
+            </div>
+          </a>
+        `).join('');
+      }
+
+      async function loadPosts() {
+        const { data, error } = await supabaseClient
+          .from('posts')
+          .select('title, slug, category, excerpt, published_at')
+          .order('published_at', { ascending: false })
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          renderPosts(fallbackPosts);
+          if (error) console.error(error);
+          return;
+        }
+
+        renderPosts(data && data.length ? data : fallbackPosts);
+      }
+
+      loadPosts();
+    })();
+  </script>
+</body>
+</html>
