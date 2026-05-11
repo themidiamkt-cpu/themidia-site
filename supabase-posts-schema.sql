@@ -118,6 +118,77 @@ where slug in (
 insert into public.posts (slug, title, category, excerpt, content, published_at)
 values
   (
+    'negocio-local-invisivel-digital',
+    'Por que negócio local invisível no digital perde clientes todos os dias',
+    'SEO local',
+    'Seu negócio é bom mas os clientes não chegam? Descubra por que negócios locais invisíveis no digital perdem vendas todos os dias e como resolver isso.',
+    'Existe um problema silencioso que afeta a maioria dos negócios locais. O negócio é bom. O dono é dedicado. O produto tem qualidade. Mas o movimento está abaixo do potencial. O motivo quase sempre é o mesmo: invisibilidade digital. Neste artigo vamos explicar o que isso significa, por que acontece e como resolver.
+
+O mito do boca a boca como estratégia de crescimento
+
+Indicação é importante. Ela mostra que o cliente confia na empresa e recomenda o serviço para outras pessoas. Mas depender apenas disso limita o crescimento.
+
+Boca a boca fideliza, não escala
+O boca a boca ajuda a manter reputação, mas não garante volume previsível de novos contatos todos os dias. Para crescer, o negócio precisa aparecer para quem ainda não conhece a marca.
+
+O cliente novo não te conhece ainda
+Quem nunca ouviu falar da sua empresa dificilmente vai procurar diretamente pelo seu nome. Esse cliente pesquisa no Google, vê anúncios, compara opções e escolhe quem aparece com clareza e confiança.
+
+O que significa aparecer no digital de verdade
+
+Aparecer no digital não é apenas ter uma conta no Instagram ou um site parado. É estar presente nos canais certos, com mensagem clara, para o público certo.
+
+Diferença entre presença orgânica e presença paga
+A presença orgânica acontece quando sua empresa aparece por conteúdo, SEO, Google Meu Negócio e autoridade construída ao longo do tempo. A presença paga acontece quando você investe em anúncios para alcançar pessoas com intenção de compra ou interesse no seu serviço.
+
+Por que só ter Instagram não é suficiente
+O Instagram ajuda na percepção da marca, mas nem sempre entrega seu conteúdo para quem está pronto para comprar. Um negócio local precisa combinar presença social, busca no Google, anúncios e páginas bem estruturadas.
+
+Como o tráfego pago resolve o problema da invisibilidade
+
+O tráfego pago coloca sua empresa na frente de pessoas que podem comprar, pedir orçamento, visitar o local ou chamar no WhatsApp.
+
+Aparecer pra quem já quer o que você vende
+Campanhas bem configuradas permitem alcançar pessoas pesquisando por soluções parecidas ou demonstrando interesse real no que sua empresa oferece.
+
+Controle de raio, público e horário
+Para negócios locais, esse controle é decisivo. É possível anunciar apenas em Campinas, Hortolândia e região, escolher perfis de público e concentrar verba nos horários de maior chance de conversão.
+
+Quais negócios locais mais se beneficiam do tráfego pago
+
+Qualquer negócio que depende de fluxo, agenda ou pedidos pode se beneficiar quando existe estratégia.
+
+Restaurantes e bares
+Anúncios ajudam a divulgar promoções, delivery, eventos, reservas e diferenciais para pessoas próximas ao estabelecimento.
+
+Clínicas e estéticas
+Campanhas podem gerar pedidos de avaliação, agendamentos e conversas qualificadas pelo WhatsApp.
+
+Lojas e e-commerces locais
+O tráfego pago ajuda a divulgar produtos, ofertas e catálogos para clientes próximos ou para compradores com maior chance de conversão.
+
+Quanto custa ser invisível no digital?
+
+A invisibilidade custa vendas que nunca chegam ao caixa. Custa oportunidades que vão para concorrentes. Custa agenda vazia, baixo movimento e dependência de indicações imprevisíveis.
+
+Quando um cliente procura por negócio local marketing digital Campinas, tráfego pago para pequenos negócios Campinas ou anúncios Meta Ads negócio local Hortolândia, ele está demonstrando intenção. Se sua empresa não aparece, outra aparece no seu lugar.
+
+Por onde começar se você nunca anunciou
+
+O primeiro passo é entender o objetivo: mais mensagens, mais ligações, mais visitas, mais orçamentos ou mais vendas.
+
+Depois disso, é preciso organizar a oferta, preparar uma página ou canal de atendimento, instalar rastreamento e criar campanhas com segmentação local. Começar pequeno, medir tudo e ajustar com consistência costuma ser o caminho mais inteligente.
+
+Conclusão
+
+Um negócio local pode ser excelente e ainda assim perder clientes todos os dias por não aparecer no digital.
+
+Marketing digital para negócios locais não é sobre postar por postar. É sobre ser encontrado, gerar confiança e transformar atenção em oportunidade real.
+
+Quer entender como o tráfego pago pode mudar os resultados do seu negócio? Faz seu diagnóstico gratuito com a The Mídia. Chama no WhatsApp agora.',
+    '2026-05-30'
+  ),
+  (
     'como-atrair-mais-clientes-pelo-google',
     'Como atrair mais clientes pelo Google sem depender apenas de indicação',
     'SEO',
