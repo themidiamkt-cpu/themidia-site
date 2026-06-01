@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulário de Contrato | The Mídia Marketing</title>
+  <link rel="icon" href="/icon.png" />
+  <style>
+    :root { color-scheme: dark; --pink:#FF1F8E; --orange:#FF6B35; --bg:#030303; --panel:#0f0f0f; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: #fff; font-family: Inter, Arial, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(720px, calc(100% - 32px)); margin: 0 auto; }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(3,3,3,.92); backdrop-filter: blur(16px); }
+    .nav { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { font-weight: 900; letter-spacing: .08em; font-size: 15px; }
+    .back-pill { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); font-size: 13px; font-weight: 700; color: rgba(255,255,255,.72); transition: border-color .2s; }
+    .back-pill:hover { border-color: rgba(255,31,142,.5); color: #fff; }
+
+    /* Hero */
+    .hero { padding: 52px 0 32px; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,31,142,.3); background: rgba(255,31,142,.08); color: var(--pink); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 6vw, 46px); font-weight: 900; line-height: 1.05; letter-spacing: -.02em; }
+    .grad { background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .lead { margin: 0; color: rgba(255,255,255,.5); font-size: 15px; line-height: 1.6; }
+
+    /* Form card */
+    .card { margin-top: 28px; margin-bottom: 80px; border: 1px solid rgba(255,255,255,.07); border-radius: 12px; background: var(--panel); box-shadow: 0 20px 60px rgba(0,0,0,.35); overflow: hidden; }
+
+    /* Section dividers inside the form */
+    .section-title { padding: 20px 28px 4px; font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); border-top: 1px solid rgba(255,255,255,.06); margin-top: 4px; }
+    .section-title:first-child { border-top: none; margin-top: 0; }
+
+    form { padding: 0 28px 28px; display: grid; gap: 14px; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 80px; gap: 14px; }
+
+    label { display: grid; gap: 7px; color: rgba(255,255,255,.65); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+    label span { color: rgba(255,31,142,.8); }
+
+    input, select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      background: #080808;
+      color: #fff;
+      padding: 12px 14px;
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    input:focus, select:focus {
+      border-color: rgba(255,31,142,.6);
+      box-shadow: 0 0 0 3px rgba(255,31,142,.1);
+    }
+    input::placeholder { color: rgba(255,255,255,.2); }
+    select option { background: #111; }
+
+    /* Submit area */
+    .submit-area { padding: 20px 28px 28px; border-top: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 14px; }
+    .submit-btn {
+      cursor: pointer; border: 0; border-radius: 999px;
+      padding: 15px 28px; color: #fff; font-weight: 900; font-size: 15px;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      box-shadow: 0 6px 24px rgba(255,31,142,.35);
+      transition: opacity .2s, transform .15s, box-shadow .2s;
+      width: 100%;
+    }
+    .submit-btn:hover { opacity: .92; transform: translateY(-1px); box-shadow: 0 10px 32px rgba(255,31,142,.45); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+    /* Status */
+    .status { min-height: 18px; font-size: 13px; line-height: 1.5; text-align: center; }
+    .status.error { color: #ff6b7d; }
+    .status.ok { color: #55e68d; }
+    .status.loading { color: rgba(255,255,255,.5); }
+
+    /* Success screen */
+    .success-screen { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 28px; gap: 16px; }
+    .success-screen.show { display: flex; }
+    .check-circle { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--orange)); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(255,31,142,.4); }
+    .check-circle svg { width: 28px; height: 28px; }
+    .success-screen h2 { margin: 0; font-size: 26px; font-weight: 900; }
+    .success-screen p { margin: 0; color: rgba(255,255,255,.55); font-size: 15px; max-width: 360px; line-height: 1.6; }
+    .success-home { margin-top: 8px; padding: 12px 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); font-size: 14px; font-weight: 700; color: rgba(255,255,255,.75); transition: border-color .2s; display: inline-block; }
+    .success-home:hover { border-color: var(--pink); color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 560px) {
+      .row2, .row3 { grid-template-columns: 1fr; }
+      form { padding: 0 18px 18px; }
+      .submit-area { padding: 16px 18px 24px; }
+      .section-title { padding: 16px 18px 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="/">THE MÍDIA MARKETING</a>
+      <a class="back-pill" href="/">← Voltar ao site</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <div class="badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="currentColor" opacity=".6"/><circle cx="5" cy="5" r="2.5" fill="currentColor"/></svg>
+        Contrato de Prestação de Serviços
+      </div>
+      <h1>Formulário <span class="grad">de Contrato</span></h1>
+      <p class="lead">Preencha os dados abaixo para formalizar sua parceria com a The Mídia Marketing.</p>
+    </div>
+
+    <div class="card" id="form-card">
+
+      <!-- SUCCESS STATE -->
+      <div class="success-screen" id="success-screen">
+        <div class="check-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h2>Enviado com sucesso!</h2>
+        <p>Recebemos seus dados. Nossa equipe entrará em contato em breve para finalizar o contrato.</p>
+        <a class="success-home" href="/">Voltar para o início</a>
+      </div>
+
+      <!-- FORM STATE -->
+      <div id="form-wrapper">
+        <div class="section-title">Dados da Empresa</div>
+        <form id="contrato-form" novalidate>
+          <label>Nome Fantasia da Empresa <span>*</span>
+            <input type="text" name="Nome Fantasia da Empresa" required />
+          </label>
+          <label>Razão Social da Empresa <span>*</span>
+            <input type="text" name="Razão Social da Empresa" required />
+          </label>
+          <label>CNPJ <span>*</span>
+            <input type="text" name="CNPJ" maxlength="18" required />
+          </label>
+
+          <!-- Endereço -->
+        </form>
+        <div class="section-title">Endereço da Empresa</div>
+        <form id="contrato-form-2">
+          <div class="row2">
+            <label>CEP <span>*</span>
+              <input type="text" name="CEP da Empresa" maxlength="9" required />
+            </label>
+            <label>UF <span>*</span>
+              <select name="UF" required>
+                <option value="">Selecione</option>
+                <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                <option selected>SP</option><option>SE</option><option>TO</option>
+              </select>
+            </label>
+          </div>
+          <label>Rua / Avenida <span>*</span>
+            <input type="text" name="Rua" required />
+          </label>
+          <div class="row2">
+            <label>Número <span>*</span>
+              <input type="text" name="Número endereço" required />
+            </label>
+            <label>Bairro <span>*</span>
+              <input type="text" name="Bairro" required />
+            </label>
+          </div>
+          <label>Cidade <span>*</span>
+            <input type="text" name="Cidade" required />
+          </label>
+        </form>
+
+        <!-- Proprietário -->
+        <div class="section-title">Dados do Proprietário(a)</div>
+        <form id="contrato-form-3">
+          <label>Nome do Proprietário(a) <span>*</span>
+            <input type="text" name="Nome do Proprietário" required />
+          </label>
+          <div class="row2">
+            <label>CPF <span>*</span>
+              <input type="text" name="CPF do proprietário  (a)" maxlength="14" required />
+            </label>
+            <label>RG <span>*</span>
+              <input type="text" name="RG do proprietário  (a)" required />
+            </label>
+          </div>
+          <div class="row2">
+            <label>Estado Civil <span>*</span>
+              <select name="Estado civil do proprietário(a)" required>
+                <option value="">Selecione</option>
+                <option>Solteiro(a)</option>
+                <option>Casado(a)</option>
+                <option>Divorciado(a)</option>
+                <option>Viúvo(a)</option>
+                <option>União Estável</option>
+              </select>
+            </label>
+            <label>Telefone / WhatsApp <span>*</span>
+              <input type="tel" name="Telefone proprietário(a)" required />
+            </label>
+          </div>
+        </form>
+
+        <!-- Pagamento -->
+        <div class="section-title">Dados de Pagamento</div>
+        <form id="contrato-form-4">
+          <div class="row2">
+            <label>Melhor data para pagamento <span>*</span>
+              <input type="date" name="Melhor data para pagamento" required />
+            </label>
+            <label>E-mail para pagamentos <span>*</span>
+              <input type="email" name="Email de pagamentos" required />
+            </label>
+          </div>
+        </form>
+
+        <div class="submit-area">
+          <div class="status" id="form-status"></div>
+          <button type="button" class="submit-btn" id="submit-btn">Enviar Formulário</button>
+        </div>
+      </div><!-- /form-wrapper -->
+
+    </div><!-- /card -->
+  </main>
+
+  <script>
+    // ── Máscaras ──────────────────────────────────────────────────────
+    function maskCNPJ(v) {
+      v = v.replace(/\D/g,'').slice(0,14);
+      if (v.length > 12) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d)/,'$1.$2.$3/$4-$5');
+      else if (v.length > 8) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d+)/,'$1.$2.$3/$4');
+      else if (v.length > 5) v = v.replace(/^(\d{2})(\d{3})(\d+)/,'$1.$2.$3');
+      else if (v.length > 2) v = v.replace(/^(\d{2})(\d+)/,'$1.$2');
+      return v;
+    }
+    function maskCPF(v) {
+      v = v.replace(/\D/g,'').slice(0,11);
+      if (v.length > 9) v = v.replace(/^(\d{3})(\d{3})(\d{3})(\d)/,'$1.$2.$3-$4');
+      else if (v.length > 6) v = v.replace(/^(\d{3})(\d{3})(\d+)/,'$1.$2.$3');
+      else if (v.length > 3) v = v.replace(/^(\d{3})(\d+)/,'$1.$2');
+      return v;
+    }
+    function maskCEP(v) {
+      v = v.replace(/\D/g,'').slice(0,8);
+      if (v.length > 5) v = v.replace(/^(\d{5})(\d+)/,'$1-$2');
+      return v;
+    }
+    function maskPhone(v) {
+      v = v.replace(/\D/g,'').slice(0,11);
+      if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+      else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d+)/,'($1) $2-$3');
+      else if (v.length > 2) v = v.replace(/^(\d{2})(\d+)/,'($1) $2');
+      return v;
+    }
+
+    document.querySelector('[name="CNPJ"]').addEventListener('input', e => e.target.value = maskCNPJ(e.target.value));
+    document.querySelector('[name="CPF do proprietário  (a)"]').addEventListener('input', e => e.target.value = maskCPF(e.target.value));
+    document.querySelector('[name="CEP da Empresa"]').addEventListener('input', e => e.target.value = maskCEP(e.target.value));
+    document.querySelector('[name="Telefone proprietário(a)"]').addEventListener('input', e => e.target.value = maskPhone(e.target.value));
+
+    // ── CEP autofill ─────────────────────────────────────────────────
+    document.querySelector('[name="CEP da Empresa"]').addEventListener('blur', async e => {
+      const cep = e.target.value.replace(/\D/g,'');
+      if (cep.length !== 8) return;
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const d = await res.json();
+        if (!d.erro) {
+          document.querySelector('[name="Rua"]').value = d.logradouro || '';
+          document.querySelector('[name="Bairro"]').value = d.bairro || '';
+          document.querySelector('[name="Cidade"]').value = d.localidade || '';
+          document.querySelector('[name="UF"]').value = d.uf || '';
+        }
+      } catch {}
+    });
+
+    // ── Coleta todos os campos ────────────────────────────────────────
+    function getAllFields() {
+      const allInputs = document.querySelectorAll('input[name], select[name]');
+      const data = {};
+      allInputs.forEach(el => { data[el.name] = el.value.trim(); });
+      // Adiciona data e horário automáticos
+      const now = new Date();
+      const dia = String(now.getDate()).padStart(2,'0');
+      const mes = String(now.getMonth()+1).padStart(2,'0');
+      const ano = now.getFullYear();
+      data['Data'] = `${dia}/${mes}/${ano}`;
+      const hr = String(now.getHours()).padStart(2,'0');
+      const mn = String(now.getMinutes()).padStart(2,'0');
+      data['Horário'] = `${hr}:${mn}`;
+      return data;
+    }
+
+    // ── Validação simples ─────────────────────────────────────────────
+    function validate(data) {
+      const required = [
+        'Nome Fantasia da Empresa','Razão Social da Empresa','CNPJ',
+        'CEP da Empresa','Rua','Número endereço','Bairro','Cidade','UF',
+        'Nome do Proprietário','CPF do proprietário  (a)','RG do proprietário  (a)',
+        'Estado civil do proprietário(a)','Telefone proprietário(a)',
+        'Melhor data para pagamento','Email de pagamentos'
+      ];
+      for (const k of required) {
+        if (!data[k]) return `Preencha o campo: ${k}`;
+      }
+      return null;
+    }
+
+    // ── Submit ────────────────────────────────────────────────────────
+    document.getElementById('submit-btn').addEventListener('click', async () => {
+      const statusEl = document.getElementById('form-status');
+      const btn = document.getElementById('submit-btn');
+
+      const data = getAllFields();
+      const err = validate(data);
+      if (err) {
+        statusEl.textContent = '⚠ ' + err;
+        statusEl.className = 'status error';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      statusEl.textContent = 'Aguarde, enviando seus dados...';
+      statusEl.className = 'status loading';
+
+      try {
+        const res = await fetch('https://automacao2.themidiamarketing.com.br/webhook/formulario-cliente', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok || res.status === 200 || res.status === 201 || res.status === 204) {
+          // Mostra tela de sucesso
+          document.getElementById('form-wrapper').style.display = 'none';
+          document.getElementById('success-screen').classList.add('show');
+        } else {
+          throw new Error('Status ' + res.status);
+        }
+      } catch (e) {
+        statusEl.textContent = '❌ Erro ao enviar. Tente novamente ou entre em contato pelo WhatsApp.';
+        statusEl.className = 'status error';
+        btn.disabled = false;
+        btn.textContent = 'Enviar Formulário';
+      }
+    });
+  </script>
+
+</body>
+</html>
