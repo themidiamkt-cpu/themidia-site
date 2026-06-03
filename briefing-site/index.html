@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Briefing de Site | The Midia Marketing</title>
+  <meta name="description" content="Formulario de briefing para criacao de sites da The Midia Marketing." />
+  <link rel="icon" href="/icon.png" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --pink: #FF1F8E;
+      --orange: #FF6B35;
+      --bg: #030303;
+      --panel: #0f0f0f;
+      --muted: rgba(255,255,255,.58);
+      --line: rgba(255,255,255,.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(255,31,142,.16), transparent 28%),
+        radial-gradient(circle at 88% 4%, rgba(255,107,53,.12), transparent 30%),
+        var(--bg);
+      color: #fff;
+      font-family: Inter, Arial, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(3,3,3,.84);
+      backdrop-filter: blur(18px);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .08em; }
+    .mark { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,31,142,.12); border: 1px solid rgba(255,31,142,.22); }
+    .mark svg { width: 22px; height: 22px; }
+    .nav-pill { padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.78); font-size: 13px; font-weight: 800; }
+    main { padding: 42px 0 86px; }
+    .hero { display: grid; grid-template-columns: .9fr 1.1fr; gap: 32px; align-items: start; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(255,31,142,.28); background: rgba(255,31,142,.08); color: var(--pink); font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 18px; }
+    h1 { margin: 0 0 16px; font-family: "Space Grotesk", Inter, Arial, sans-serif; font-size: clamp(38px, 7vw, 78px); line-height: .96; letter-spacing: -.02em; }
+    .grad { background: linear-gradient(135deg, var(--pink), var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .lead { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.65; max-width: 560px; }
+    .side-card { margin-top: 28px; display: grid; gap: 12px; }
+    .mini { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.035); border-radius: 8px; padding: 16px; }
+    .mini strong { display: block; margin-bottom: 6px; font-size: 14px; }
+    .mini span { color: rgba(255,255,255,.48); font-size: 13px; line-height: 1.5; }
+    .shell { border: 1px solid rgba(255,255,255,.09); border-radius: 8px; background: rgba(15,15,15,.92); box-shadow: 0 30px 80px rgba(0,0,0,.34); overflow: hidden; }
+    .progress-top { padding: 22px 24px 18px; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02); }
+    .step-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; color: rgba(255,255,255,.54); font-size: 12px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .bar { height: 8px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .bar span { display: block; height: 100%; width: 10%; border-radius: inherit; background: linear-gradient(135deg, var(--pink), var(--orange)); transition: width .35s ease; }
+    form { padding: 28px; }
+    .step { display: none; animation: rise .28s ease both; }
+    .step.active { display: block; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .step h2 { margin: 0 0 8px; font-family: "Space Grotesk", Inter, Arial, sans-serif; font-size: clamp(24px, 3vw, 34px); }
+    .step p { margin: 0 0 24px; color: rgba(255,255,255,.5); line-height: 1.55; }
+    .grid { display: grid; gap: 16px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label { display: grid; gap: 8px; color: rgba(255,255,255,.72); font-size: 13px; font-weight: 850; }
+    label small { color: rgba(255,255,255,.38); font-weight: 600; line-height: 1.45; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      background: #070707;
+      color: #fff;
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    textarea { min-height: 126px; resize: vertical; line-height: 1.55; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(255,31,142,.72); box-shadow: 0 0 0 3px rgba(255,31,142,.12); background: #090909; }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,.26); }
+    select option { background: #101010; }
+    .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .check-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      background: rgba(255,255,255,.035);
+      padding: 13px;
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .check-card input { width: 16px; height: 16px; accent-color: var(--pink); }
+    .upload-box { border: 1px dashed rgba(255,255,255,.2); border-radius: 8px; background: rgba(255,255,255,.025); padding: 15px; }
+    input[type=file] { padding: 12px; background: rgba(255,255,255,.03); }
+    .actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 24px; margin-top: 26px; border-top: 1px solid rgba(255,255,255,.08); }
+    button { cursor: pointer; border: 0; border-radius: 999px; padding: 14px 20px; color: #fff; font-weight: 950; background: linear-gradient(135deg, var(--pink), var(--orange)); box-shadow: 0 8px 28px rgba(255,31,142,.26); transition: transform .16s ease, opacity .16s ease; }
+    button:hover { transform: translateY(-1px); }
+    button:disabled { opacity: .48; cursor: not-allowed; transform: none; }
+    button.secondary { background: transparent; border: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.76); box-shadow: none; }
+    .status { min-height: 20px; color: rgba(255,255,255,.52); font-size: 13px; line-height: 1.5; }
+    .status.error { color: #ff6b7d; }
+    .status.ok { color: #55e68d; }
+    .autosave { color: rgba(255,255,255,.36); font-size: 12px; }
+    .success { display: none; padding: 54px 28px; text-align: center; }
+    .success.show { display: block; animation: rise .3s ease both; }
+    .success-icon { width: 72px; height: 72px; margin: 0 auto 18px; border-radius: 999px; display: grid; place-items: center; background: linear-gradient(135deg, var(--pink), var(--orange)); box-shadow: 0 18px 44px rgba(255,31,142,.34); }
+    .success h2 { margin: 0 0 12px; font-family: "Space Grotesk", Inter, Arial, sans-serif; font-size: 34px; }
+    .success p { margin: 0 auto 24px; max-width: 520px; color: rgba(255,255,255,.58); line-height: 1.6; }
+    .hidden { display: none !important; }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+      .side-card { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 620px) {
+      main { padding-top: 28px; }
+      .nav { min-height: 64px; }
+      .brand span { display: none; }
+      .side-card, .row, .checks { grid-template-columns: 1fr; }
+      form { padding: 20px; }
+      .progress-top { padding: 18px 20px 16px; }
+      .actions { flex-direction: column-reverse; align-items: stretch; }
+      .actions button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="/">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2s7 4 7 12a7 7 0 1 1-14 0C5 6 12 2 12 2Z" fill="url(#g)"/><circle cx="12" cy="13" r="3" fill="#fff"/><defs><linearGradient id="g" x1="4" y1="2" x2="20" y2="22"><stop stop-color="#FF1F8E"/><stop offset="1" stop-color="#FF6B35"/></linearGradient></defs></svg></span>
+        <span>THE MIDIA</span>
+      </a>
+      <a class="nav-pill" href="/">Voltar ao site</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Briefing de site</div>
+        <h1>Vamos construir um site com <span class="grad">direcao clara.</span></h1>
+        <p class="lead">Este briefing ajuda nossa equipe a entender seu negocio, publico, objetivo, referencias e materiais antes de iniciar a criacao do site.</p>
+        <div class="side-card">
+          <div class="mini"><strong>Autosave ativo</strong><span>Suas respostas ficam salvas neste navegador enquanto voce preenche.</span></div>
+          <div class="mini"><strong>Experiencia guiada</strong><span>10 etapas curtas para organizar tudo sem ficar pesado.</span></div>
+        </div>
+      </div>
+
+      <section class="shell" id="form-shell">
+        <div class="progress-top">
+          <div class="step-meta">
+            <span id="step-label">Etapa 1 de 10</span>
+            <span id="step-title">Empresa</span>
+          </div>
+          <div class="bar" aria-hidden="true"><span id="progress-bar"></span></div>
+        </div>
+
+        <form id="briefing-form" novalidate>
+          <div class="step active" data-title="Empresa">
+            <h2>Sobre a empresa</h2>
+            <p>Comece pelo essencial: quem e a empresa e por que ela merece atencao.</p>
+            <div class="grid">
+              <div class="row">
+                <label>Nome da empresa
+                  <input name="nome_empresa" required autocomplete="organization" />
+                </label>
+                <label>Segmento
+                  <input name="segmento" required placeholder="Ex: clinica estetica, advocacia, ecommerce" />
+                </label>
+              </div>
+              <label>O que sua empresa faz?
+                <textarea name="descricao_empresa" required></textarea>
+              </label>
+              <label>Qual seu principal diferencial?
+                <textarea name="diferencial" required></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Publico">
+            <h2>Publico</h2>
+            <p>Quanto mais claro for o cliente ideal, mais precisa fica a estrutura do site.</p>
+            <div class="grid">
+              <label>Quem e seu cliente ideal?
+                <textarea name="cliente_ideal" required></textarea>
+              </label>
+              <label>Em quais cidades ou regioes atende?
+                <input name="regiao_atendimento" required placeholder="Ex: Campinas, Hortolandia e regiao" />
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Objetivo">
+            <h2>Objetivo do site</h2>
+            <p>Defina o que o site precisa gerar na pratica.</p>
+            <div class="grid">
+              <label>Qual o principal objetivo do site?
+                <select name="objetivo_site" required>
+                  <option value="">Selecione</option>
+                  <option>Gerar contatos</option>
+                  <option>Vender produtos</option>
+                  <option>Agendamentos</option>
+                  <option>Apresentar a empresa</option>
+                  <option>Outro</option>
+                </select>
+              </label>
+              <label>Qual acao principal o visitante deve realizar ao entrar no site?
+                <input name="acao_principal" required placeholder="Ex: chamar no WhatsApp, preencher formulario, comprar" />
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Servicos">
+            <h2>Servicos e produtos</h2>
+            <p>Liste o que deve receber mais destaque na navegacao e nas chamadas.</p>
+            <div class="grid">
+              <label>Quais servicos ou produtos devem ter destaque?
+                <textarea name="servicos_destaque" required></textarea>
+              </label>
+              <label>Existe algum servico mais lucrativo ou estrategico?
+                <textarea name="servico_estrategico"></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Credibilidade">
+            <h2>Credibilidade</h2>
+            <p>Depoimentos, avaliacoes e cases ajudam o site a vender com mais confianca.</p>
+            <div class="grid">
+              <label>Possui depoimentos, avaliacoes ou cases?
+                <textarea name="cases" placeholder="Conte aqui e/ou envie arquivos abaixo."></textarea>
+              </label>
+              <label class="upload-box">Arquivos de cases, prints ou depoimentos
+                <input id="cases_files" type="file" multiple />
+                <small>PDF, imagens, documentos ou prints.</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Design">
+            <h2>Direcao visual</h2>
+            <p>Referencias ajudam a alinhar gosto, posicionamento e nivel de sofisticacao.</p>
+            <div class="grid">
+              <label>Sites de referencia (links)
+                <textarea name="referencias" placeholder="Cole um link por linha"></textarea>
+              </label>
+              <label>Estilo visual desejado
+                <select name="estilo_visual" required>
+                  <option value="">Selecione</option>
+                  <option>Moderno</option>
+                  <option>Premium</option>
+                  <option>Minimalista</option>
+                  <option>Sofisticado</option>
+                  <option>Tecnologico</option>
+                </select>
+              </label>
+              <label>Observacoes sobre identidade visual
+                <textarea name="observacoes_design"></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Materiais">
+            <h2>Materiais</h2>
+            <p>Envie tudo que pode ajudar na construcao visual do site.</p>
+            <div class="grid">
+              <div class="row">
+                <label class="upload-box">Logo
+                  <input id="logo_files" type="file" multiple />
+                </label>
+                <label class="upload-box">Fotos da empresa
+                  <input id="empresa_files" type="file" multiple />
+                </label>
+              </div>
+              <div class="row">
+                <label class="upload-box">Fotos da equipe
+                  <input id="equipe_files" type="file" multiple />
+                </label>
+                <label class="upload-box">Fotos de produtos
+                  <input id="produtos_files" type="file" multiple />
+                </label>
+              </div>
+              <label class="upload-box">Outros materiais
+                <input id="outros_files" type="file" multiple />
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Contato">
+            <h2>Contato</h2>
+            <p>Esses dados ajudam a configurar chamadas, rodape e canais de conversao.</p>
+            <div class="grid">
+              <div class="row">
+                <label>WhatsApp
+                  <input name="whatsapp" required inputmode="tel" placeholder="(19) 99999-9999" />
+                </label>
+                <label>E-mail
+                  <input name="email" type="email" required autocomplete="email" />
+                </label>
+              </div>
+              <label>Endereco
+                <input name="endereco" required />
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Integracoes">
+            <h2>Integracoes</h2>
+            <p>Marque as ferramentas que o site deve considerar desde o inicio.</p>
+            <div class="checks" id="integracoes-list">
+              <label class="check-card"><input type="checkbox" name="integracoes" value="WhatsApp" /> WhatsApp</label>
+              <label class="check-card"><input type="checkbox" name="integracoes" value="CRM" /> CRM</label>
+              <label class="check-card"><input type="checkbox" name="integracoes" value="Google Analytics" /> Google Analytics</label>
+              <label class="check-card"><input type="checkbox" name="integracoes" value="Google Tag Manager" /> Google Tag Manager</label>
+              <label class="check-card"><input type="checkbox" name="integracoes" value="Meta Pixel" /> Meta Pixel</label>
+              <label class="check-card"><input type="checkbox" name="integracoes" value="Google Agenda" /> Google Agenda</label>
+              <label class="check-card"><input type="checkbox" name="integracoes" value="Outro" /> Outro</label>
+            </div>
+          </div>
+
+          <div class="step" data-title="Final">
+            <h2>Observacoes finais</h2>
+            <p>Use este espaco para detalhes importantes que nao apareceram nas etapas anteriores.</p>
+            <label>Existe alguma informacao importante que devemos saber?
+              <textarea name="observacoes_finais"></textarea>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button class="secondary" type="button" id="prev-btn">Voltar</button>
+            <div>
+              <div class="status" id="form-status"></div>
+              <div class="autosave" id="autosave-status">Rascunho salvo automaticamente.</div>
+            </div>
+            <button type="button" id="next-btn">Continuar</button>
+          </div>
+        </form>
+
+        <div class="success" id="success-screen">
+          <div class="success-icon" aria-hidden="true">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h2>Briefing enviado.</h2>
+          <p>Recebemos suas informacoes. Nossa equipe vai analisar o material e seguir com os proximos passos.</p>
+          <a class="nav-pill" href="/">Voltar ao site</a>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://mujaacymoymysjvkvtdm.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11amFhY3ltb3lteXNqdmt2dGRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1NjY4NjYsImV4cCI6MjA4NTE0Mjg2Nn0.fHUyHc4lHIKHMQ5vjw5PP5sYSUo09oCq4qvLmrNs5uY';
+    const BUCKET = 'briefing-site-files';
+    const DRAFT_KEY = 'themidia-briefing-site-draft';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById('briefing-form');
+    const steps = Array.from(document.querySelectorAll('.step'));
+    const progressBar = document.getElementById('progress-bar');
+    const stepLabel = document.getElementById('step-label');
+    const stepTitle = document.getElementById('step-title');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const statusEl = document.getElementById('form-status');
+    const autosaveEl = document.getElementById('autosave-status');
+    const successScreen = document.getElementById('success-screen');
+    let currentStep = 0;
+
+    const fileInputs = [
+      ['cases', 'cases_files'],
+      ['logo', 'logo_files'],
+      ['fotos_empresa', 'empresa_files'],
+      ['fotos_equipe', 'equipe_files'],
+      ['fotos_produtos', 'produtos_files'],
+      ['outros', 'outros_files']
+    ];
+
+    function setStatus(message, type = '') {
+      statusEl.textContent = message || '';
+      statusEl.className = `status ${type}`.trim();
+    }
+
+    function renderStep() {
+      steps.forEach((step, index) => step.classList.toggle('active', index === currentStep));
+      const progress = ((currentStep + 1) / steps.length) * 100;
+      progressBar.style.width = `${progress}%`;
+      stepLabel.textContent = `Etapa ${currentStep + 1} de ${steps.length}`;
+      stepTitle.textContent = steps[currentStep].dataset.title;
+      prevBtn.disabled = currentStep === 0;
+      nextBtn.textContent = currentStep === steps.length - 1 ? 'Enviar briefing' : 'Continuar';
+      setStatus('');
+    }
+
+    function currentRequiredFields() {
+      return Array.from(steps[currentStep].querySelectorAll('[required]'));
+    }
+
+    function validateStep() {
+      const empty = currentRequiredFields().find(field => !String(field.value || '').trim());
+      if (empty) {
+        empty.focus();
+        setStatus('Preencha os campos obrigatorios desta etapa.', 'error');
+        return false;
+      }
+      return true;
+    }
+
+    function getPayload() {
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.integracoes = Array.from(form.querySelectorAll('input[name="integracoes"]:checked')).map(item => item.value);
+      data.status = 'Novo';
+      return data;
+    }
+
+    function saveDraft() {
+      const draft = getPayload();
+      delete draft.status;
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      autosaveEl.textContent = 'Rascunho salvo agora.';
+      clearTimeout(saveDraft.timer);
+      saveDraft.timer = setTimeout(() => autosaveEl.textContent = 'Rascunho salvo automaticamente.', 1400);
+    }
+
+    function restoreDraft() {
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return;
+        const draft = JSON.parse(raw);
+        Object.entries(draft).forEach(([name, value]) => {
+          if (name === 'integracoes' && Array.isArray(value)) {
+            form.querySelectorAll('input[name="integracoes"]').forEach(input => input.checked = value.includes(input.value));
+            return;
+          }
+          const field = form.elements[name];
+          if (field) field.value = value;
+        });
+      } catch {}
+    }
+
+    function safeFileName(name) {
+      return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/-+/g, '-').slice(0, 120);
+    }
+
+    async function uploadFiles(briefingId) {
+      const result = {};
+      for (const [group, inputId] of fileInputs) {
+        const input = document.getElementById(inputId);
+        const files = Array.from(input.files || []);
+        result[group] = [];
+        for (const file of files) {
+          const path = `${briefingId}/${group}/${Date.now()}-${safeFileName(file.name)}`;
+          const { error } = await supabaseClient.storage.from(BUCKET).upload(path, file, {
+            cacheControl: '3600',
+            upsert: false
+          });
+          if (error) throw error;
+          result[group].push({ name: file.name, path, size: file.size, type: file.type });
+        }
+      }
+      return result;
+    }
+
+    async function submitBriefing() {
+      setStatus('Enviando briefing...');
+      nextBtn.disabled = true;
+      prevBtn.disabled = true;
+      try {
+        const id = crypto.randomUUID();
+        const payload = getPayload();
+        payload.id = id;
+        payload.arquivos = await uploadFiles(id);
+
+        const { error } = await supabaseClient.from('briefing_sites').insert(payload);
+        if (error) throw error;
+
+        localStorage.removeItem(DRAFT_KEY);
+        form.classList.add('hidden');
+        document.querySelector('.progress-top').classList.add('hidden');
+        successScreen.classList.add('show');
+      } catch (error) {
+        setStatus(`Erro ao enviar: ${error.message}`, 'error');
+        nextBtn.disabled = false;
+        prevBtn.disabled = currentStep === 0;
+      }
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentStep === 0) return;
+      currentStep -= 1;
+      renderStep();
+    });
+
+    nextBtn.addEventListener('click', async () => {
+      if (!validateStep()) return;
+      saveDraft();
+      if (currentStep < steps.length - 1) {
+        currentStep += 1;
+        renderStep();
+        return;
+      }
+      await submitBriefing();
+    });
+
+    form.addEventListener('input', saveDraft);
+    form.addEventListener('change', saveDraft);
+    restoreDraft();
+    renderStep();
+  </script>
+</body>
+</html>
