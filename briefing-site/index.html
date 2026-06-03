@@ -360,6 +360,7 @@
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11amFhY3ltb3lteXNqdmt2dGRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1NjY4NjYsImV4cCI6MjA4NTE0Mjg2Nn0.fHUyHc4lHIKHMQ5vjw5PP5sYSUo09oCq4qvLmrNs5uY';
     const BUCKET = 'briefing-site-files';
     const DRAFT_KEY = 'themidia-briefing-site-draft';
+    const WEBHOOK_URL = 'https://automacao2.themidiamarketing.com.br/webhook/formulario-briefing-site';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const form = document.getElementById('briefing-form');
@@ -468,6 +469,15 @@
       return result;
     }
 
+    async function sendWebhook(payload) {
+      const response = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(`Webhook retornou status ${response.status}`);
+    }
+
     async function submitBriefing() {
       setStatus('Enviando briefing...');
       nextBtn.disabled = true;
@@ -480,6 +490,7 @@
 
         const { error } = await supabaseClient.from('briefing_sites').insert(payload);
         if (error) throw error;
+        await sendWebhook(payload);
 
         localStorage.removeItem(DRAFT_KEY);
         form.classList.add('hidden');
