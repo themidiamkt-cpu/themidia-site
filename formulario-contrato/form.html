@@ -110,7 +110,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '595890515304194');
 fbq('track', 'PageView');
 </script>
-<!-- End Meta Pixel Code --><script id="openai-gpt-pixel">!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"93nrgbG7cyVrwEjXLAStHK",debug:true});</script></head>
+<!-- End Meta Pixel Code --><script id="openai-gpt-pixel">!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"93nrgbG7cyVrwEjXLAStHK",debug:true});</script><script src="/openai-conversions.js" defer></script></head>
 <body><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=595890515304194&ev=PageView&noscript=1" /></noscript>
 
   <header>
@@ -356,6 +356,7 @@ fbq('track', 'PageView');
 
         if (res.ok || res.status === 200 || res.status === 201 || res.status === 204) {
           // Mostra tela de sucesso
+          if (typeof window.trackOpenAILead === 'function') window.trackOpenAILead('contract_form_success');
           document.getElementById('form-wrapper').style.display = 'none';
           document.getElementById('success-screen').classList.add('show');
         } else {
