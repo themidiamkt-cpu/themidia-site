@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[50516,["/_next/static/chunks/0v5zmslqyy8-7.js"],"ViewportBoundary"]
+3:I[50516,["/_next/static/chunks/0v5zmslqyy8-7.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+5:I[40173,["/_next/static/chunks/0v5zmslqyy8-7.js"],"IconMark"]
+0:{"rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"The Mídia Marketing — Tráfego Pago em Hortolândia, SP"}],["$","meta","1",{"name":"description","content":"Agência de tráfego pago em Hortolândia, SP. Gestão de Meta Ads, Google Ads e marketing digital para pequenos negócios que querem crescer de verdade."}],["$","meta","2",{"name":"keywords","content":"tráfego pago, meta ads, google ads, agência marketing, hortolândia, campinas, SP"}],["$","link","3",{"rel":"icon","href":"/icon.png"}],["$","link","4",{"rel":"apple-touch-icon","href":"/apple-icon.png"}],["$","$L5","5",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"UnoAuRpmm-yGfw7vEgJ-y"}
