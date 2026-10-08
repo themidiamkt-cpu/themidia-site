@@ -1,0 +1,24 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": null,
+  "functions": { "api/clinica-estetica.js": { "maxDuration": 30 } },
+  "headers": [
+    { "source": "/clinica-estetica/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+      { "key": "X-Frame-Options", "value": "DENY" }
+    ] }
+  ],
+  "redirects": [
+    { "source": "/clinica-estetica", "destination": "/clinica-estetica/", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/clinica-estetica", "destination": "/clinica-estetica/index.html" },
+    { "source": "/clinica-estetica/", "destination": "/clinica-estetica/index.html" },
+    { "source": "/clinica-estetica/obrigado/qualificado/:path*", "destination": "/clinica-estetica/obrigado/qualificado/index.html" },
+    { "source": "/clinica-estetica/obrigado/nutricao/:path*", "destination": "/clinica-estetica/obrigado/nutricao/index.html" },
+    { "source": "/clinica-estetica/privacidade/:path*", "destination": "/clinica-estetica/privacidade/index.html" }
+  ]
+}
