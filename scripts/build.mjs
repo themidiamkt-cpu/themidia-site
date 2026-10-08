@@ -24,7 +24,9 @@ export function config() {
   const pixel = process.env.META_PIXEL_ID || '';
   if (pixel && !/^\d+$/.test(pixel)) throw new Error('META_PIXEL_ID inválido.');
   return {
-    endpoint: '/api/clinica-estetica', pixelId: pixel,
+    endpoint: '/api/clinica-estetica',
+    directWebhookUrl: publicUrl('PUBLIC_N8N_WEBHOOK_URL', 'https://automacao2.themidiamarketing.com.br/webhook/form-themidia'),
+    pixelId: pixel,
     siteUrl: publicUrl('PUBLIC_SITE_URL', 'https://www.themidiamarketing.com.br'),
     instagramUrl: publicUrl('PUBLIC_INSTAGRAM_URL', 'https://www.instagram.com/agenciathemidia/'),
     whatsappUrl: publicUrl('PUBLIC_WHATSAPP_URL', 'https://wa.me/5519999315179'),

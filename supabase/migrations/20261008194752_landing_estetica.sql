@@ -45,7 +45,7 @@ create index if not exists landing_estetica_phone_date_idx on public.landing_est
 create table if not exists public.landing_estetica_deliveries (
   id uuid primary key default gen_random_uuid(),
   event_id uuid not null references public.landing_estetica_submissions(event_id),
-  channel text not null check (channel in ('n8n','meta')),
+  channel text not null check (channel in ('n8n','meta','crm')),
   payload jsonb not null,
   status text not null default 'pending' check (status in ('pending','processing','delivered','failed')),
   attempts integer not null default 0,
@@ -56,6 +56,9 @@ create table if not exists public.landing_estetica_deliveries (
   unique(event_id,channel)
 );
 create index if not exists landing_estetica_delivery_pending_idx on public.landing_estetica_deliveries (available_at) where status in ('pending','failed','processing');
+-- Canal 'crm' (entrada automática do DeskcommCRM). Refaz a regra para o caso de a tabela já existir com a lista antiga.
+alter table public.landing_estetica_deliveries drop constraint if exists landing_estetica_deliveries_channel_check;
+alter table public.landing_estetica_deliveries add constraint landing_estetica_deliveries_channel_check check (channel in ('n8n','meta','crm'));
 alter table public.landing_estetica_submissions enable row level security;
 alter table public.landing_estetica_deliveries enable row level security;
 revoke all on public.landing_estetica_submissions,public.landing_estetica_deliveries from public,anon,authenticated;

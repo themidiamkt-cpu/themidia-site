@@ -13,6 +13,25 @@ function formatPhone(value) { const v = phoneDigits(value).slice(0,11); if (!v) 
 function validInstagram(value) { const v = String(value||'').replace(/^@/,''); return /^(?!\.)(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9_.]{1,30}$/.test(v); }
 const privacyVersion = '2026-10-08';
 const config = window.CLINICA_CONFIG || {};
+function fallbackQualification(lead){
+  const qualified=lead.profissionais!=='solo'&&lead.verba!=='ate-1500'&&lead.ticket!=='ate-250';
+  const high=qualified&&['400-800','acima-800'].includes(lead.ticket)&&lead.atendimento==='recepcionista';
+  const pontuacao=({solo:0,'2-4':20,'5+':25}[lead.profissionais]||0)+({'ate-1500':0,'1500-3000':20,'acima-3000':25}[lead.verba]||0)+({'ate-250':0,'250-400':15,'400-800':20,'acima-800':25}[lead.ticket]||0)+({recepcionista:20,proprio:10,ninguem:0}[lead.atendimento]||0)+(lead.anuncios==='sim'?5:0);
+  return {qualified,status_qualificacao:high?'PRIORIDADE ALTA':qualified?'QUALIFICADO':'NUTRIÇÃO',pontuacao};
+}
+function directWebhookUrl(){
+  try{const url=new URL(String(config.directWebhookUrl||''),location.href);return url.protocol==='https:'?url.href:'';}catch{return '';}
+}
+async function submitToStaticWebhook(payload){
+  const url=directWebhookUrl();
+  if(!url)throw new Error('O envio ainda não está configurado nesta página.');
+  const qualification=fallbackQualification(payload);
+  const body={event:'landing_estetica_lead',...payload,...payload.attribution,utms:payload.attribution,origem:'landing-estetica',...qualification,criado_em:new Date().toISOString(),delivery_mode:'static_webhook_fallback'};
+  // text/plain é uma requisição simples: o navegador consegue enviá-la ao n8n
+  // mesmo quando o workflow não expõe cabeçalhos CORS para uma página estática.
+  await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});
+  return {ok:true,qualified:qualification.qualified,redirect:`/clinica-estetica/obrigado/${qualification.qualified?'qualificado':'nutricao'}/`};
+}
 const privacyUrl = new URL('privacidade/', location.href).href;
 const getStore = (key) => { try { return JSON.parse(sessionStorage.getItem(key)); } catch { return null; } };
 const setStore = (key,value) => { try { sessionStorage.setItem(key,JSON.stringify(value)); } catch {} };
@@ -102,10 +121,24 @@ function setupForm(){
     const fbc=cookie('_fbc') || (attribution.fbclid ? `fb.1.${attribution.captured_at||Date.now()}.${attribution.fbclid}`:'');
     const payload={...data,whatsapp:'55'+phoneDigits(data.whatsapp),instagram:'@'+data.instagram.replace(/^@/,''),event_id:eventId,privacy_version:privacyVersion,consentimento:true,attribution:Object.fromEntries(keys.map(k=>[k,attribution[k]||''])),fbp:cookie('_fbp'),fbc,website:form.elements.website.value};
     try{
-      const response=await fetch(config.endpoint||'/api/clinica-estetica',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(25000)});
-      let result;try{result=await response.json();}catch{throw new Error('Não foi possível enviar agora. Suas respostas estão aqui. Tente novamente.');}
-      if(!response.ok||!result.ok)throw new Error(result.error || 'Não foi possível enviar agora. Tente novamente.');
-      if(!['/clinica-estetica/obrigado/qualificado/','/clinica-estetica/obrigado/nutricao/'].includes(result.redirect))throw new Error('Resposta inesperada. Tente novamente.');
+      let result;
+      let primaryError;
+      let primaryStatus=0;
+      try{
+        const response=await fetch(config.endpoint||'/api/clinica-estetica',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(25000)});
+        primaryStatus=response.status;
+        let parsed;try{parsed=await response.json();}catch{throw Object.assign(new Error('Resposta inválida da API.'),{status:response.status});}
+        if(!response.ok||!parsed.ok)throw Object.assign(new Error(parsed.error || 'A API não aceitou o envio.'),{status:response.status});
+        result=parsed;
+      }catch(err){
+        primaryError=err;
+        // A página publicada no Hostinger pode não ter uma função Node para /api.
+        // Nesses casos, entrega o mesmo payload diretamente ao webhook público.
+        const canFallback=Boolean(directWebhookUrl())&&!([400,401,403,413].includes(err?.status||primaryStatus));
+        if(!canFallback)throw err;
+        result=await submitToStaticWebhook(payload);
+      }
+      if(!result||!['/clinica-estetica/obrigado/qualificado/','/clinica-estetica/obrigado/nutricao/'].includes(result.redirect))throw primaryError||new Error('Resposta inesperada. Tente novamente.');
       const sentKey='tm_estetica_sent_'+eventId;
       if(!getStore(sentKey)&&window.fbq){window.fbq('track','Lead',{content_name:'Diagnóstico clínica de estética'},{eventID:eventId});if(result.qualified)window.fbq('trackCustom','LeadQualificado',{content_name:'Diagnóstico clínica de estética'},{eventID:eventId});setStore(sentKey,true);}
       setStore('tm_estetica_success',{event_id:eventId,at:Date.now()});
