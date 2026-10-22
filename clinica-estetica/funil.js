@@ -13,6 +13,9 @@ function formatPhone(value) { const v = phoneDigits(value).slice(0,11); if (!v) 
 function validInstagram(value) { const v = String(value||'').replace(/^@/,''); return /^(?!\.)(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9_.]{1,30}$/.test(v); }
 const privacyVersion = '2026-10-08';
 const config = window.CLINICA_CONFIG || {};
+// O endereço do webhook é público. Mantemos um padrão aqui para que uma cópia
+// antiga de config.js na hospedagem não impeça o envio do lead.
+const defaultDirectWebhook = 'https://automacao2.themidiamarketing.com.br/webhook/form-themidia';
 function fallbackQualification(lead){
   const qualified=lead.profissionais!=='solo'&&lead.verba!=='ate-1500'&&lead.ticket!=='ate-250';
   const high=qualified&&['400-800','acima-800'].includes(lead.ticket)&&lead.atendimento==='recepcionista';
@@ -20,7 +23,7 @@ function fallbackQualification(lead){
   return {qualified,status_qualificacao:high?'PRIORIDADE ALTA':qualified?'QUALIFICADO':'NUTRIÇÃO',pontuacao};
 }
 function directWebhookUrl(){
-  try{const url=new URL(String(config.directWebhookUrl||''),location.href);return url.protocol==='https:'?url.href:'';}catch{return '';}
+  try{const url=new URL(String(config.directWebhookUrl||defaultDirectWebhook),location.href);return url.protocol==='https:'?url.href:'';}catch{return '';}
 }
 async function submitToStaticWebhook(payload){
   const url=directWebhookUrl();
@@ -134,7 +137,7 @@ function setupForm(){
         primaryError=err;
         // A página publicada no Hostinger pode não ter uma função Node para /api.
         // Nesses casos, entrega o mesmo payload diretamente ao webhook público.
-        const canFallback=Boolean(directWebhookUrl())&&!([400,401,403,413].includes(err?.status||primaryStatus));
+        const canFallback=Boolean(directWebhookUrl())&&!([401,403,413].includes(err?.status||primaryStatus));
         if(!canFallback)throw err;
         result=await submitToStaticWebhook(payload);
       }

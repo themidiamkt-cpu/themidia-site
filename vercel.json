@@ -3,7 +3,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
-  "functions": { "api/clinica-estetica.js": { "maxDuration": 30 } },
+  "functions": { "api/clinica-estetica.js": { "maxDuration": 30 }, "api/black-clinicas.js": { "maxDuration": 15 } },
   "headers": [
     { "source": "/clinica-estetica/(.*)", "headers": [
       { "key": "X-Content-Type-Options", "value": "nosniff" },
@@ -12,10 +12,13 @@
     ] }
   ],
   "redirects": [
-    { "source": "/clinica-estetica", "destination": "/clinica-estetica/", "permanent": false }
+    { "source": "/clinica-estetica", "destination": "/clinica-estetica/", "permanent": false },
+    { "source": "/black-clinicas", "destination": "/black-clinicas/", "permanent": false }
   ],
   "rewrites": [
     { "source": "/clinica-estetica", "destination": "/clinica-estetica/index.html" },
+    { "source": "/black-clinicas", "destination": "/black-clinicas/index.html" },
+    { "source": "/black-clinicas/", "destination": "/black-clinicas/index.html" },
     { "source": "/clinica-estetica/", "destination": "/clinica-estetica/index.html" },
     { "source": "/clinica-estetica/obrigado/qualificado/:path*", "destination": "/clinica-estetica/obrigado/qualificado/index.html" },
     { "source": "/clinica-estetica/obrigado/nutricao/:path*", "destination": "/clinica-estetica/obrigado/nutricao/index.html" },

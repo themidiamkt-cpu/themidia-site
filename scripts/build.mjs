@@ -1,10 +1,10 @@
-import { cp, mkdir, readdir, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 const root = process.cwd();
 const out = path.join(root, 'dist');
 await mkdir(out, { recursive: true });
 // Lista explícita: nunca publicar .env, API, migrações, testes ou instruções internas.
-const dirs = ['_next', '_not-found', '404', 'admin', 'blog', 'briefing-site', 'formulario-contrato', 'clinica-estetica'];
+const dirs = ['_next', '_not-found', '404', 'admin', 'blog', 'briefing-site', 'formulario-contrato', 'clinica-estetica', 'black-clinicas', 'motion-demo'];
 const publicExtensions = /\.(html|css|js|mjs|png|webp|avif|jpg|jpeg|svg|ico|woff2|txt)$/i;
 async function copyPublic(source, destination) {
   await cp(source, destination, { recursive: true, filter: (src) => !/\.(md|bak)$/i.test(src) && !path.basename(src).startsWith('.') });
@@ -13,6 +13,8 @@ for (const dir of dirs) await copyPublic(path.join(root, dir), path.join(out, di
 for (const item of await readdir(root, { withFileTypes: true })) {
   if (item.isFile() && publicExtensions.test(item.name)) await cp(path.join(root, item.name), path.join(out, item.name));
 }
+// A home tem fonte editável própria. O export anterior fica preservado na raiz.
+await cp(path.join(root, 'home.html'), path.join(out, 'index.html'));
 function publicUrl(name, fallback = '') {
   const val = process.env[name] || fallback;
   if (!val) return '';
