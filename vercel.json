@@ -3,20 +3,29 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
-  "functions": { "api/clinica-estetica.js": { "maxDuration": 30 }, "api/black-clinicas.js": { "maxDuration": 15 } },
+  "functions": { "api/clinica-estetica.js": { "maxDuration": 30 }, "api/black-clinicas.js": { "maxDuration": 15 }, "api/briefing.js": { "maxDuration": 15 } },
   "headers": [
     { "source": "/clinica-estetica/(.*)", "headers": [
       { "key": "X-Content-Type-Options", "value": "nosniff" },
       { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
       { "key": "X-Frame-Options", "value": "DENY" }
+    ] },
+    { "source": "/briefing/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+      { "key": "X-Frame-Options", "value": "DENY" },
+      { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
     ] }
   ],
   "redirects": [
     { "source": "/clinica-estetica", "destination": "/clinica-estetica/", "permanent": false },
-    { "source": "/black-clinicas", "destination": "/black-clinicas/", "permanent": false }
+    { "source": "/black-clinicas", "destination": "/black-clinicas/", "permanent": false },
+    { "source": "/briefing", "destination": "/briefing/", "permanent": false }
   ],
   "rewrites": [
     { "source": "/clinica-estetica", "destination": "/clinica-estetica/index.html" },
+    { "source": "/briefing", "destination": "/briefing/index.html" },
+    { "source": "/briefing/", "destination": "/briefing/index.html" },
     { "source": "/black-clinicas", "destination": "/black-clinicas/index.html" },
     { "source": "/black-clinicas/", "destination": "/black-clinicas/index.html" },
     { "source": "/clinica-estetica/", "destination": "/clinica-estetica/index.html" },

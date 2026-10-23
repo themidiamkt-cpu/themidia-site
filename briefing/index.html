@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Briefing Estratégico | The Mídia Marketing</title>
+  <meta name="description" content="Briefing estratégico para clientes da The Mídia Marketing.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#141013">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="progress-shell" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
+  <header class="hero">
+    <div class="hero__inner">
+      <a class="brand" href="../" aria-label="The Mídia Marketing — início"><span class="brand__mark">TM</span><span>The Mídia <small>Marketing</small></span></a>
+      <p class="eyebrow">Briefing estratégico</p>
+      <h1>Briefing para conhecer<br><span>você de verdade.</span></h1>
+      <p class="hero__copy">Suas respostas guiam toda a estratégia do seu Instagram. Responda com calma e com o máximo de detalhes que puder. Não existe resposta certa ou errada.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="status-row" aria-live="polite"><span id="progressText">0 de 15 perguntas respondidas</span><span id="draftStatus">Rascunho salvo neste dispositivo</span></div>
+    <form id="briefingForm" novalidate>
+      <section class="form-section" aria-labelledby="section-1">
+        <div class="section-heading"><span>01</span><div><p>Começamos pela essência</p><h2 id="section-1">Sobre você</h2></div></div>
+        <div class="field"><label for="nome"><b>01</b> Qual o seu nome? <em>Obrigatório</em></label><input id="nome" name="nome" type="text" autocomplete="name" maxlength="120" required><p class="error" id="nomeError"></p></div>
+        <div class="field"><label for="tempo"><b>02</b> Quanto tempo atua na sua área?</label><input id="tempo" name="tempo" type="text" maxlength="300"></div>
+        <div class="field"><label for="historia"><b>03</b> Qual a sua história? Por que você decidiu trabalhar nessa área?</label><textarea id="historia" name="historia" rows="5" maxlength="5000"></textarea></div>
+        <div class="field"><label for="comoseve"><b>04</b> Como você se vê?</label><textarea id="comoseve" name="comosevê" rows="4" maxlength="5000"></textarea></div>
+        <div class="field"><label for="explica"><b>05</b> Quando alguém lhe pergunta, como você explica quem é e o que você faz?</label><textarea id="explica" name="explica" rows="5" maxlength="5000"></textarea></div>
+      </section>
+
+      <section class="form-section" aria-labelledby="section-2">
+        <div class="section-heading"><span>02</span><div><p>O cenário ao seu redor</p><h2 id="section-2">Mercado</h2></div></div>
+        <div class="field"><label for="concorrentes"><b>06</b> Quem são os seus concorrentes diretos e indiretos?</label><textarea id="concorrentes" name="concorrentes" rows="5" maxlength="5000"></textarea></div>
+        <div class="field"><label for="diferencial"><b>07</b> Na sua opinião, qual o seu principal diferencial em relação aos seus concorrentes?</label><textarea id="diferencial" name="diferencial" rows="5" maxlength="5000"></textarea></div>
+      </section>
+
+      <section class="form-section" aria-labelledby="section-3">
+        <div class="section-heading"><span>03</span><div><p>Onde queremos chegar</p><h2 id="section-3">Objetivos</h2></div></div>
+        <div class="field"><label for="objetivo"><b>08</b> Conta pra gente o seu objetivo com o marketing digital e as suas expectativas com o serviço da agência.</label><textarea id="objetivo" name="objetivo" rows="5" maxlength="5000"></textarea></div>
+        <div class="field"><label for="feliz"><b>09</b> Se nós atingirmos tal objetivo você ficará feliz. Que objetivo é esse?</label><textarea id="feliz" name="feliz" rows="5" maxlength="5000"></textarea></div>
+      </section>
+
+      <section class="form-section" aria-labelledby="section-4">
+        <div class="section-heading"><span>04</span><div><p>O jeito da sua marca falar</p><h2 id="section-4">Comunicação</h2></div></div>
+        <div class="field"><label for="instagram"><b>10</b> Como você gostaria que fosse o seu Instagram?</label><textarea id="instagram" name="instagram" rows="5" maxlength="5000"></textarea></div>
+        <div class="field"><label for="proibido"><b>11</b> Há algo que não pode ser feito na sua comunicação? Algo que você não gostaria que estivesse dentro da nossa estratégia?</label><p class="hint">De repente alguma cor que não pode ser utilizada, entre outros detalhes.</p><textarea id="proibido" name="proibido" rows="5" maxlength="5000"></textarea></div>
+        <div class="field"><label for="bordao"><b>12</b> Você tem algum bordão ou fala/palavra que já é conhecido pela sua audiência?</label><textarea id="bordao" name="bordao" rows="4" maxlength="5000"></textarea></div>
+        <div class="field"><label for="inspira"><b>13</b> Quais são as pessoas que mais te inspiram nas redes sociais? Cite abaixo os perfis de cada uma delas.</label><p class="hint">Exemplo: @perfil1, @perfil2.</p><textarea id="inspira" name="inspira" rows="4" maxlength="5000"></textarea></div>
+        <fieldset class="field chips-field"><legend><b>14</b> Você concorda que pode ser definido em quais dessas palavras?</legend><p class="hint">Selecione quantas opções fizerem sentido.</p><div class="chips" id="palavrasChips"></div></fieldset>
+      </section>
+
+      <section class="form-section" aria-labelledby="section-5">
+        <div class="section-heading"><span>05</span><div><p>Para quem vamos comunicar</p><h2 id="section-5">Público</h2></div></div>
+        <div class="field"><label for="publico"><b>15</b> Como é o público que desejamos alcançar?</label><p class="hint">Cite com a maior quantidade de detalhes possível qual o perfil atual do seu público e/ou o público que você deseja atingir.</p><textarea id="publico" name="publico" rows="6" maxlength="5000"></textarea></div>
+      </section>
+
+      <section class="privacy-box" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Privacidade e segurança</h2>
+        <p>Usaremos estas informações apenas para planejar e executar a estratégia e os serviços da The Mídia. O rascunho permanece somente neste dispositivo até o envio.</p>
+        <label class="consent"><input id="consentimento" type="checkbox" required><span>Li e concordo com o tratamento das informações para a elaboração da estratégia e prestação do serviço.</span></label>
+        <p class="error" id="consentError"></p>
+      </section>
+
+      <div id="formMessage" class="form-message" role="alert" tabindex="-1"></div>
+      <div class="actions"><button class="button button--secondary" id="copyButton" type="button">Copiar todas as respostas</button><button class="button button--primary" id="submitButton" type="submit"><span>Enviar briefing</span><i aria-hidden="true"></i></button></div>
+    </form>
+
+    <section id="successPanel" class="success-panel" hidden aria-live="polite">
+      <div class="success-icon" aria-hidden="true">✓</div><p class="eyebrow">Envio confirmado</p><h2>Recebemos o seu briefing!</h2>
+      <p>Obrigado por compartilhar essas informações. Nossa equipe já pode começar a entender melhor sua marca e preparar os próximos passos.</p>
+      <button class="button button--primary" id="successCopyButton" type="button">Copiar minhas respostas</button>
+    </section>
+  </main>
+  <footer>© The Mídia Marketing <span>•</span> Estratégia feita com contexto.</footer>
+  <script src="./script.js" defer></script>
+</body>
+</html>

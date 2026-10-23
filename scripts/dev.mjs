@@ -7,8 +7,8 @@ const mime = { '.html':'text/html; charset=utf-8', '.js':'text/javascript; chars
 const server = http.createServer(async (req, res) => {
   const pathname = new URL(req.url, 'http://localhost').pathname;
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  if (pathname === '/api/clinica-estetica') {
-    try { const { default: handler } = await import('../api/clinica-estetica.js'); await handler(req, res); }
+  if (pathname === '/api/clinica-estetica' || pathname === '/api/briefing') {
+    try { const modulePath = pathname === '/api/briefing' ? '../api/briefing.js' : '../api/clinica-estetica.js'; const { default: handler } = await import(modulePath); await handler(req, res); }
     catch (err) { console.error('Falha na API local:', err.name); if (!res.headersSent) res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'Integração indisponível. Tente novamente.' })); }
     return;
   }

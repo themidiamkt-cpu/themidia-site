@@ -4,7 +4,7 @@ const root = process.cwd();
 const out = path.join(root, 'dist');
 await mkdir(out, { recursive: true });
 // Lista explícita: nunca publicar .env, API, migrações, testes ou instruções internas.
-const dirs = ['_next', '_not-found', '404', 'admin', 'blog', 'briefing-site', 'formulario-contrato', 'clinica-estetica', 'black-clinicas', 'motion-demo'];
+const dirs = ['_next', '_not-found', '404', 'admin', 'blog', 'briefing-site', 'briefing', 'formulario-contrato', 'clinica-estetica', 'black-clinicas', 'motion-demo'];
 const publicExtensions = /\.(html|css|js|mjs|png|webp|avif|jpg|jpeg|svg|ico|woff2|txt)$/i;
 async function copyPublic(source, destination) {
   await cp(source, destination, { recursive: true, filter: (src) => !/\.(md|bak)$/i.test(src) && !path.basename(src).startsWith('.') });
