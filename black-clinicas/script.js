@@ -1,5 +1,5 @@
 const PIXEL_ID='595890515304194';
-if(!window.fbq){const fbq=function(){fbq.callMethod?fbq.callMethod.apply(fbq,arguments):fbq.queue.push(arguments)};fbq.queue=[];fbq.loaded=true;fbq.version='2.0';window.fbq=fbq;window._fbq=fbq;const s=document.createElement('script');s.async=true;s.src='https://connect.facebook.net/en_US/fbevents.js';document.head.appendChild(s)}
+if(!window.fbq){const fbq=function(){fbq.callMethod?fbq.callMethod.apply(fbq,arguments):fbq.queue.push(arguments)};fbq.queue=[];fbq.loaded=true;fbq.version='2.0';window.fbq=fbq;window._fbq=fbq}
 window.fbq('init',PIXEL_ID);window.fbq('track','PageView');
 const form=document.querySelector('#lead-form'), statusEl=document.querySelector('#status');
 const params=new URLSearchParams(location.search), keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'];
