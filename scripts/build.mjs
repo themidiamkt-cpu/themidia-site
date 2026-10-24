@@ -31,7 +31,7 @@ export function config() {
     pixelId: pixel,
     siteUrl: publicUrl('PUBLIC_SITE_URL', 'https://www.themidiamarketing.com.br'),
     instagramUrl: publicUrl('PUBLIC_INSTAGRAM_URL', 'https://www.instagram.com/agenciathemidia/'),
-    whatsappUrl: publicUrl('PUBLIC_WHATSAPP_URL', 'https://wa.me/5519999315179'),
+    whatsappUrl: publicUrl('PUBLIC_WHATSAPP_URL', 'https://wa.me/551931919350'),
     bookingUrl: publicUrl('PUBLIC_BOOKING_URL')
   };
 }

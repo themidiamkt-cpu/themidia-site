@@ -61,7 +61,7 @@ document.querySelectorAll('[data-instagram]').forEach(a=>a.href=config.instagram
 document.querySelectorAll('[data-whatsapp]').forEach(a=>a.href=config.whatsappUrl || a.href);
 document.querySelectorAll('[data-booking]').forEach(a=>{
   if(config.bookingUrl) a.href=config.bookingUrl;
-  else { a.href=(config.whatsappUrl || 'https://wa.me/5519999315179')+'?text='+encodeURIComponent('Olá! Pedi meu diagnóstico e quero agendar uma conversa online de 20 minutos.'); a.textContent='Agendar conversa pelo WhatsApp ↗'; }
+  else { a.href=(config.whatsappUrl || 'https://wa.me/551931919350')+'?text='+encodeURIComponent('Olá! Pedi meu diagnóstico e quero agendar uma conversa online de 20 minutos.'); a.textContent='Agendar conversa pelo WhatsApp ↗'; }
 });
 const form = document.getElementById('lead-form');
 if(form) setupForm();

@@ -6,5 +6,5 @@ window.CLINICA_CONFIG = {
   directWebhookUrl: 'https://automacao2.themidiamarketing.com.br/webhook/form-themidia',
   siteUrl: 'https://www.themidiamarketing.com.br',
   instagramUrl: 'https://www.instagram.com/agenciathemidia/',
-  whatsappUrl: 'https://wa.me/5519999315179', bookingUrl: ''
+  whatsappUrl: 'https://wa.me/551931919350', bookingUrl: ''
 };
